@@ -1,0 +1,50 @@
+version: '3.5'
+
+services: 
+    db-service:
+        image: sneyd321/db-service-celery
+        depends_on: 
+            - mysql
+        ports: 
+            - 8085:8085
+        networks: 
+            - roomr-network
+        volumes:
+            - ./orm-service:/usr/src/app 
+
+        restart: on-failure
+    
+    celery:
+        image: sneyd321/db-service-celery
+        depends_on: 
+            - db-service
+        networks: 
+            - roomr-network
+        volumes:
+            - ./orm-service:/usr/src/app 
+        command: celery -A server.c worker
+
+        restart: on-failure
+   
+
+ 
+    mysql:
+        image: mysql
+        
+        command: --init-file /data/application/init.sql
+        volumes: 
+            - ./mysql-volume/init/init.sql:/data/application/init.sql
+            - ./mysql-volume/data:/var/lib/mysql
+
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+
+        cap_add:
+            - SYS_NICE
+        networks: 
+            - roomr-network
+
+ 
+
+networks: 
+    roomr-network:
