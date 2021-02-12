@@ -17,12 +17,10 @@ bucket = storage.bucket()
 db = SQLAlchemy()
 
 from celery import Celery
-ccc = Celery("server", broker='amqp://', backend='rpc://')
-
 
 app = Flask(__name__)
 
-c = Celery("server", broker='amqp://guest:guest@192.168.0.115:5672/')
+c = Celery("server", broker='amqp://guest:guest@host.docker.internal:5672')
 c.config_from_object('celeryconfig')
 
 

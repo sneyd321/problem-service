@@ -2,3 +2,4 @@
 __pycache__/
 mysql-volume/data/*
 !mysql-volume/data/.gitkeep
+orm-service/server/static/ServiceAccount.json

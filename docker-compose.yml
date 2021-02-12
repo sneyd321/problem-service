@@ -18,6 +18,7 @@ services:
         image: sneyd321/db-service-celery
         depends_on: 
             - db-service
+            - problem-rabbit
         networks: 
             - roomr-network
         volumes:
@@ -25,7 +26,12 @@ services:
         command: celery -A server.c worker
 
         restart: on-failure
-   
+
+    problem-rabbit:
+        image: rabbitmq:3-management
+        ports: 
+            - 5672:5672
+            - 15672:15672
 
  
     mysql:
