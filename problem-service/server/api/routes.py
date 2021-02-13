@@ -4,7 +4,7 @@ from server.api.models import Problem
 import json, base64
 from server.api.tasks import upload_image
 from sqlalchemy import exc
-import logging
+
 
             
 @problem.route("/Problem", methods=["POST"])
