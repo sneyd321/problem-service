@@ -9,13 +9,15 @@ class Config:
 
 
     def productionConfig(self):    
-        self.app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://admin:admin@mysql:3306/roomr"
-        self.app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+        self.app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:root@mysql-service.default.svc.cluster.local:3306/roomr"
+        self.app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+        self.app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_size' : 100, 'pool_recycle' : 280}
         return self.app
 
     def developmentConfig(self):    
         self.app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:root@host.docker.internal:3306/roomr"
         self.app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+        self.app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {'pool_size' : 100, 'pool_recycle' : 280}
         return self.app
 
     def testConfig(self):

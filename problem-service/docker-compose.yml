@@ -1,0 +1,15 @@
+version: '3.5'
+
+services: 
+    problem-service:
+        image: sneyd321/problem-service 
+        ports: 
+            - 8085:8085
+        volumes: 
+            - ./:/usr/src/app
+        restart: on-failure
+    
+
+
+ 
+    

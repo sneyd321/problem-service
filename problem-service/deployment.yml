@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: problem-service
+spec:
+  selector:
+    matchLabels:
+      run: problem-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: problem-service
+    spec:
+      containers:
+      - name: problem-service
+        image: sneyd321/problem-service
+        ports:
+        - containerPort: 8085
+   
+        
+      imagePullSecrets:
+        - name: key
